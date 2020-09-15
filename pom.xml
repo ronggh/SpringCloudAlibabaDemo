@@ -11,6 +11,7 @@
         <module>nacos-provider-payment-9001</module>
         <module>nacos-consume-order-8001</module>
         <module>nacos-config-7001</module>
+        <module>sentinel-service-8401</module>
     </modules>
 
     <!-- 父工程指定类型为pom -->
