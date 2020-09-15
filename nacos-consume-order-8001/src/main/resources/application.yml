@@ -1,0 +1,17 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: nocos-consume-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+# 消费者要去访问的微服务名称（已注册到Nacos）
+service-url:
+  nacos-user-service: http://nacos-provider-payment
+
+
+
+
+
