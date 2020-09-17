@@ -12,6 +12,9 @@
         <module>nacos-consume-order-8001</module>
         <module>nacos-config-7001</module>
         <module>sentinel-service-8401</module>
+        <module>seata-order-20001</module>
+        <module>seata-storage-20002</module>
+        <module>seata-account-20003</module>
     </modules>
 
     <!-- 父工程指定类型为pom -->
