@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import cn.alan.dao.OrderDao;
@@ -12,6 +11,7 @@ import cn.alan.entity.Order;
 import cn.alan.service.IAccountService;
 import cn.alan.service.IOrderService;
 import cn.alan.service.IStorageService;
+import io.seata.spring.annotation.GlobalTransactional;
 
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements IOrderService {
@@ -28,9 +28,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements IO
      * 创建订单->调用库存服务扣减库存->调用账户服务扣减账户余额->修改订单状态 简单说：下订单->扣库存->减余额->改状态
      */
     @Override
+    @GlobalTransactional(name = "order", rollbackFor = Exception.class)
     public void createOrder(Order order) {
         // 1. 下订单
-        orderDao.insert(order);
+        orderDao.createOrder(order);
 
         // 2. 扣减库存
         storageService.decrease(order.getProductId(), order.getCount());
@@ -39,9 +40,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements IO
         accountService.decrease(order.getUserId(), order.getMoney());
 
         // 4. 修改订单状态，从0到1,1代表已经完成
-        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", order.getUserId()).eq("status", 0);
-        orderDao.update(order, queryWrapper);
+        orderDao.updateStatus(order.getUserId(), order.getProductId());
 
     }
 }

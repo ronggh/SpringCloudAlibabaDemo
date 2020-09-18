@@ -18,6 +18,6 @@ public interface AccountDao extends BaseMapper<Account> {
      * @param userId
      * @param money
      */
-    @Update("UPDATE t_account SET residue = residue - #{money}, used = used + #{money}  WHERE user_id = #{userId}")
+    @Update("UPDATE account_tbl SET residue = residue - #{money}, used = used + #{money}  WHERE user_id = #{userId}")
     void decrease(@Param("userId") Long userId, @Param("money") BigDecimal money);
 }

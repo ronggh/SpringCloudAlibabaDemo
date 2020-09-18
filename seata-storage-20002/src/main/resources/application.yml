@@ -8,16 +8,15 @@ spring:
     alibaba:
       seata:
         #自定义事务组名称需要与seata-server中的对应
-        #tx-service-group: fsp_tx_group
+        tx-service-group: my_test_tx_group
     nacos:
       discovery:
         server-addr: localhost:8848
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/seata_order
+    url: jdbc:mysql://127.0.0.1:3306/seata_storage
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
 feign:
@@ -33,6 +32,3 @@ logging:
   level:
     io:
       seata: info
-
-mybatis:
-  mapperLocations: classpath:mapper/*.xml

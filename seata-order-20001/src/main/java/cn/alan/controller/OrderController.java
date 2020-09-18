@@ -21,5 +21,4 @@ public class OrderController {
         orderService.createOrder(order);
         return new CommonResult<>(200, "订单创建成功", order);
     }
-
 }
