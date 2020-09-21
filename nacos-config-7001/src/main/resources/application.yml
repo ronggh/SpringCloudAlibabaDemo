@@ -1,6 +1,6 @@
 spring:
   profiles:
     #表示激活开发环境
-    active: dev
-    #active: test
+#    active: dev
+    active: test
     #active: info

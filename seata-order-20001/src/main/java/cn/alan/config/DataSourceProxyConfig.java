@@ -44,5 +44,4 @@ public class DataSourceProxyConfig {
         sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
         return sqlSessionFactoryBean.getObject();
     }
-
 }
